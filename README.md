@@ -5,7 +5,7 @@ In modern 64-bit computer architectures, software usually only uses the lower 48
 Instead of letting these bits go to waste, some people prefer to repurpose these spare high bits to store custom metadata—like type flags, garbage collection marks, or reference counts—right inside the pointer itself. This technique is known as pointer tagging.
 
 Tags themselves are 16-bit in length by default, they reside at the higher bits of the tagged_ptr,
-while the value itself is stored in the higher bits of the struct, or in a case of custom types 
+while the address itself is stored in the lower bits of the struct, or in a case of custom types 
 and data types that are longer than 32-bit in length separate secondary variable is used to store value.
 For data types lesser than 64-bit in length, tag is packed in the higher bits of the given value; 
 to save up some space. 
