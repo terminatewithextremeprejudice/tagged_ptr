@@ -98,7 +98,7 @@
 	typedef s PREFIX(t);										\
 													\
 	static tagged_##t	setter(int, t);	    							\
-	static t			getter(tagged_##t* ptr);					\
+	static t		getter(tagged_##t* ptr);						\
 													\
 	TAGGED_PTR_DEF tagged_##t									\
 	tagged_create_##t (t value)		    							\
@@ -128,7 +128,7 @@
 	}												\
 													\
 	extern tagged_##t										\
-	tagged_create_##t (void* dst, t value)								\
+	tagged_create_##t (t value)									\
 	{												\
 		return (PREFIX(t)) { tag, value };							\
 	}
@@ -141,11 +141,11 @@
         double secondary;
 #endif
 
-#if !defined(TAGGED_PTR_NO_BASE_TYPES)
+// #if !defined(TAGGED_PTR_NO_BASE_TYPES)
 typedef struct {
     TAGGED_PTR_BASE_FIELDS
 } tagged_t;
-#endif 
+// #endif 
 
 typedef struct {
     TAGGED_PTR_BASE_FIELDS
@@ -170,7 +170,6 @@ typedef struct {
 	XX(TAG_INT8,	int8_t,	  tagged_t,     tagged_ptr_int8_t_setter,   tagged_ptr_int8_t_getter)	    \
 	XX(TAG_INT16,	int16_t,  tagged_t,     tagged_ptr_int16_t_setter,  tagged_ptr_int16_t_getter)      \
 	XX(TAG_INT32,	int32_t,  tagged_e_t,   tagged_ptr_int32_t_setter,  tagged_ptr_int32_t_getter)      \
-	XX(TAG_INT64,	int64_t,  tagged_e_t,   tagged_ptr_int64_t_setter,  tagged_ptr_int64_t_getter)      \
 	XX(TAG_FLOAT,	float,	  tagged_e_t,   tagged_ptr_float_setter,    tagged_ptr_float_getter)        \
 	XX(TAG_DOUBLE,	double,	  tagged_e_t,   tagged_ptr_double_setter,   tagged_ptr_double_getter)
 #       endif
@@ -217,10 +216,11 @@ typedef enum {
 #   endif
 #endif
 
+
 TAGGED_PTR_DEF int
 tagged_ptr_get_tag(void* tagged)
 {
-    TAGGED_PTR_ASSERT(tagged != NULL);
+    	TAGGED_PTR_ASSERT(tagged != NULL);
 
 	return ((tagged_t*)tagged)->primary & TAGGED_PTR_TAG_BITS;
 }
@@ -298,6 +298,7 @@ tagged_ptr_int32_t_getter(tagged_int32_t* ptr)
 #endif 
 }
 
+#ifdef ARCH64
 TAGGED_PTR_DEF inline tagged_int64_t
 tagged_ptr_int64_t_setter(int tag, int64_t value)
 {
@@ -352,6 +353,9 @@ tagged_ptr_double_getter(tagged_double* ptr)
 
 	return (double)(ptr->secondary);
 }
+#else /* ARCH32 */
+
+#endif /* ifdef ARCH64 */
 #endif
 
 #undef ARCH32

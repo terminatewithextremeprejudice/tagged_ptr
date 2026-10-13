@@ -18,17 +18,17 @@ main(void)
 	int16_t	int16x = 666;
 	int8_t	int8x = 66;
 
-	tagged_intptr_t ptr	= tagged_create_intptr_t((intptr_t)&ptrx);
-	tagged_int8_t	ptr_int8 = tagged_create_int8_t(int8x);
-	tagged_int16_t	ptr_int16 = tagged_create_int16_t(int16x);
-	tagged_int32_t	ptr_int32 = tagged_create_int32_t(int32x);
-	tagged_int64_t	ptr_int64 = tagged_create_int64_t(int64x);
-	tagged_float	ptr_float = tagged_create_float(floatx);
-	tagged_double   ptr_double = tagged_create_double(doublex);
+	tagged_intptr_t ptr		= tagged_create_intptr_t((intptr_t)&ptrx);
+	tagged_int8_t	ptr_int8 	= tagged_create_int8_t(int8x);
+	tagged_int16_t	ptr_int16 	= tagged_create_int16_t(int16x);
+	tagged_int32_t	ptr_int32 	= tagged_create_int32_t(int32x);
+	tagged_int64_t	ptr_int64 	= tagged_create_int64_t(int64x);
+	tagged_float	ptr_float 	= tagged_create_float(floatx);
+	tagged_double   ptr_double 	= tagged_create_double(doublex);
 
-    	assert(tagged_ptr_get_tag(&ptr) == TAG_PTR);
-    	assert(tagged_ptr_get_tag(&ptr_int8) == TAG_INT8);
-    	assert(tagged_ptr_get_tag(&ptr_int16) == TAG_INT16);
+	assert(tagged_ptr_get_tag(&ptr) == TAG_PTR);
+	assert(tagged_ptr_get_tag(&ptr_int8) == TAG_INT8);
+	assert(tagged_ptr_get_tag(&ptr_int16) == TAG_INT16);
     	assert(tagged_ptr_get_tag(&ptr_int32) == TAG_INT32);
     	assert(tagged_ptr_get_tag(&ptr_int64) == TAG_INT64);
     	assert(tagged_ptr_get_tag(&ptr_float) == TAG_FLOAT);
@@ -47,5 +47,5 @@ main(void)
 	printf("ptr %p %p %lf			%d \n", &ptr_double, &ptr_double, tagged_ptr_double_getter(&ptr_double), tagged_ptr_get_tag((tagged_t*)&ptr_double));
 
 
-    return 0;
+    	return 0;
 }
