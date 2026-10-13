@@ -42,7 +42,6 @@ To provide custom definition of tags just define TAGGED_PTR_NO_TAG_ENUM before i
 #define TAGGED_PTR_NO_TAG_ENUM 
 #include "tagged_ptr.h"
 ```
-
 If you wish to do this you need to define base tags you need to provide your own definitions instead 
 or this won't compile.
 
